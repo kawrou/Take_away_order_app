@@ -32,7 +32,7 @@ Given a two instance of the same food to be added to the menu
 Food should only be added to the menu_items list if it's unique
 Raise exception error
 """
-def test_for_single_food_added_to_menu_list():
+def test_multiples_of_same_food_in_menu_list_raises_exception_error():
     new_menu = Menu()
     new_menu.add_food(pizza)
     with pytest.raises(Exception) as e:
@@ -44,9 +44,9 @@ def test_for_single_food_added_to_menu_list():
 """
 Given multiple instances of food to be added to the menu
 Instances of food should be added to the menu_items list if it's not already in the list
-show_menu should then display all the food on the menu if it's availble to order
+show_menu should then display all the food on the menu
 """
-def test_view_menu():
+def test_show_the_menu_of_3_food_items():
     #new_menu = Menu()
     #FoodItem("Pizza", £5) => name: "Pizza" price: £5
     #add_food(food_1) & add_food(food_2) gets added to menu_items list
@@ -57,3 +57,27 @@ def test_view_menu():
     new_menu.add_food(burger)
     assert new_menu.show_menu() == [pizza, hot_dog, burger]
     pass
+
+"""
+Given multiple instances of food to be added to the menu
+Instances of food should be added to the menu_items list if it's not already in the list
+show_menu should then display all the food on the menu if it's availble to order
+"""
+def test_show_the_menu_only_of_items_available_to_order():
+    #new_menu = Menu()
+    #FoodItem("Pizza", £5) => name: "Pizza" price: £5
+    #add_food(food_1) & add_food(food_2) gets added to menu_items list
+    #show_menu() => [food_1, food_2]
+    new_menu = Menu()
+    new_menu.add_food(pizza)
+    new_menu.add_food(hot_dog)
+    new_menu.add_food(burger)
+
+    chicken = Mock()
+    chicken.availability.return_value = False
+
+    new_menu.add_food(chicken)
+    #new_menu.add_food.assert_called_with(chicken)
+    assert new_menu.menu_list == [pizza, hot_dog, burger, chicken]
+    assert new_menu.show_menu() == [pizza, hot_dog, burger]
+

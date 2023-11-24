@@ -10,4 +10,4 @@ class Menu:
         return
     
     def show_menu(self):
-        return self.menu_list
+        return [food for food in self.menu_list if food.availability == True]
