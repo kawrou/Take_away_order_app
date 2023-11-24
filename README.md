@@ -80,7 +80,7 @@ class FoodItem:
         #   price: int
         #   availability: boolean
         pass
-    def make_available(self)
+    def make_unavailable(self)
         #Side-effects:
         #   Sets availability of food
         pass
