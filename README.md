@@ -98,8 +98,11 @@ class Order:
         #Side-effects:
         #   Adds food_item to order
 
-    def format_order(self):
-        #
+    def format_order(self, order):
+        #Parameters:
+        #   order: from order_list containing instances of the foods being ordered
+        #Returns:
+        #   #A nicely formated detail of the order being placed
 
     def show_order(self):
         format_order
