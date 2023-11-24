@@ -1,5 +1,6 @@
 from lib.menu import*
 from unittest.mock import Mock
+import pytest
 
 pizza = Mock()
 pizza.name.return_value = "Pizza"
@@ -26,6 +27,18 @@ def test_for_single_food_added_to_menu_list():
     new_menu.add_food(pizza)
     assert new_menu.show_menu() == [pizza]
 
+"""
+Given a two instance of the same food to be added to the menu
+Food should only be added to the menu_items list if it's unique
+Raise exception error
+"""
+def test_for_single_food_added_to_menu_list():
+    new_menu = Menu()
+    new_menu.add_food(pizza)
+    with pytest.raises(Exception) as e:
+        new_menu.add_food(pizza)
+    error_message = str(e.value)
+    assert error_message == "Food item already in menu"
 
 
 """
